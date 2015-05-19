@@ -1,6 +1,7 @@
 {
     "name": "mybuilder/conductor",
     "description": "Tools for managing multiple packages in one source repository",
+    "license": "MIT",
     "authors": [{
         "name": "Sten Hiedel",
         "email": "r.sten@hiedel.ee"
