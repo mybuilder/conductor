@@ -28,10 +28,9 @@ This repository comes with a simple [todo example](examples/todo/), along with a
 If however, you wish to quickly get up and running, you can add 'conductor' to your root composer.json file and then configure/save the following YAML file to 'conductor.yml'.
 
 ``` yaml
-conductors:
-    artifacts_repository: conductor
-    packages:
-        - package/*
+artifacts_repository: ./artifact
+packages:
+    - package/*
 ```
 
 Once this has been completed you can include the following boilerplate (with paths corrected for your setup) to each internal packages composer.json file.
@@ -54,8 +53,8 @@ Once this has been completed you can include the following boilerplate (with pat
     },
     "repositories": [
         {
-            "type": "conductor",
-            "url": "../../conductor"
+            "type": "artifact",
+            "url": "../../artifact"
         }
     ]
 }
