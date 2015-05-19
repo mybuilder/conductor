@@ -22,17 +22,17 @@
         "pre-update-cmd": [
             "../../bin/conductor update -c ../.."
         ],
-        "pre-autoload-dump": [
-            "../../bin/conductor symlink -c ../.."
-        ],
         "post-update-cmd": [
             "../../bin/conductor fix-composer-lock -c ../.."
+        ],
+        "pre-autoload-dump": [
+            "../../bin/conductor symlink -c ../.."
         ]
     },
     "repositories": [
         {
-            "type": "conductor",
-            "url": "../../conductor"
+            "type": "artifact",
+            "url": "../../artifact/"
         }
     ]
 }
