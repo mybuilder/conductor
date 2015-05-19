@@ -1,0 +1,7 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$app = new \MyBuilder\App\ToDo\Cli\App(__DIR__ . '/tasks.json');
+$app->run();

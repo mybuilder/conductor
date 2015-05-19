@@ -1,0 +1,15 @@
+{
+    "name": "mybuilder/todo-package",
+    "version": "0.1",
+    "autoload": {
+        "psr-4": {
+            "MyBuilder\\Package\\ToDo\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

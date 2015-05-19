@@ -1,0 +1,8 @@
+{
+    "name": "example/package-a",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "_": "This is changed but the version is the same",
+    "require": {}
+}

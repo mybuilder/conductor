@@ -1,0 +1,38 @@
+{
+    "name": "mybuilder/todo-cli",
+    "version": "0.1",
+    "autoload": {
+        "psr-4": {
+            "MyBuilder\\App\\ToDo\\Cli\\": "src/"
+        }
+    },
+    "require": {
+        "mybuilder/todo-package": "*@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "pre-install-cmd": [
+            "../../bin/conductor update -c ../.."
+        ],
+        "pre-update-cmd": [
+            "../../bin/conductor update -c ../.."
+        ],
+        "pre-autoload-dump": [
+            "../../bin/conductor symlink -c ../.."
+        ],
+        "post-update-cmd": [
+            "../../bin/conductor fix-composer-lock -c ../.."
+        ]
+    },
+    "repositories": [
+        {
+            "type": "conductor",
+            "url": "../../conductor"
+        }
+    ]
+}

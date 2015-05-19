@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists(__DIR__ . '/../../autoload.php')) {
+    require __DIR__ . '/../../autoload.php';
+} else {
+    require __DIR__ . '/vendor/autoload.php';
+}
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Filesystem\Filesystem;
+use MyBuilder\Conductor\Command as Commands;
+use MyBuilder\Conductor\Conductor;
+
+$conductor = new Conductor(new Filesystem());
+
+$app = new Application();
+$app->add(new Commands\UpdateCommand($conductor));
+$app->add(new Commands\SymlinkCommand($conductor));
+$app->add(new Commands\LockFixerCommand($conductor));
+$app->run();

@@ -1,0 +1,3 @@
+artifacts_repository: ./artifact
+packages:
+  - ./package/*

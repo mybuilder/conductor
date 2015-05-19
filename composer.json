@@ -1,0 +1,28 @@
+{
+    "name": "mybuilder/conductor",
+    "description": "Tools for managing multiple packages in one source repository",
+    "authors": [{
+        "name": "Sten Hiedel",
+        "email": "r.sten@hiedel.ee"
+    }],
+    "require": {
+        "symfony/console": "~2.6",
+        "symfony/finder": "~2.6",
+        "symfony/yaml": "~2.6",
+        "symfony/filesystem": "~2.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyBuilder\\Conductor\\": "src/"
+        }
+    },
+    "bin": ["conductor"],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9-dev"
+        }
+    }
+}

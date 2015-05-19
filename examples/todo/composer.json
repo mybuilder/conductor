@@ -1,0 +1,15 @@
+{
+    "name": "mybuilder/todo",
+    "repositories": [
+        {
+            "type":"vcs",
+            "url":"git@github.com:mybuilder/conductor.git"
+        }
+    ],
+    "require": {
+        "mybuilder/conductor": "*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
