@@ -1,6 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/mybuilder/conductor.svg?branch=master)](http://travis-ci.org/mybuilder/conductor)
 
-![Conductor](logo.png =150x)
+<img src="logo.png" style="max-width:150px;">
 
 Conductor
 =========
