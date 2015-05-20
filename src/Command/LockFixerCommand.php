@@ -20,19 +20,22 @@ class LockFixerCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $fs = new Filesystem();
+        $fileSystem = new Filesystem();
         $configuration = $this->getConfiguration();
         $conductorRealPaths = $this->getConductorRealPaths($configuration['artifacts_repository']);
 
         foreach ($this->createFinder()->in(getcwd()) as $lockFile) {
-            $relativePaths = $this->getRelativePaths($fs, $lockFile, $conductorRealPaths);
+            $relativePaths = $this->getRelativePaths($fileSystem, $lockFile, $conductorRealPaths);
 
-            if ($this->fixLockFileRealPathsWithRelativePaths($lockFile, $conductorRealPaths, $relativePaths)) {
+            if ($this->fixLockFileRealPathsWithRelativePaths($fileSystem, $lockFile, $conductorRealPaths, $relativePaths)) {
                 $output->writeln('<info>Fixed lock file</info> "' . $lockFile . '"');
             }
         }
     }
 
+    /**
+     * @return Finder
+     */
     private function createFinder()
     {
         return Finder::create()
@@ -50,14 +53,14 @@ class LockFixerCommand extends BaseCommand
         }, iterator_to_array($finder));
     }
 
-    private function getRelativePaths(Filesystem $fs, \SplFileInfo $lockFile, array $conductorRealPaths)
+    private function getRelativePaths(Filesystem $fileSystem, \SplFileInfo $lockFile, array $conductorRealPaths)
     {
-        return array_map(function ($conductorPath) use ($fs, $lockFile) {
-            return $fs->makePathRelative(dirname($conductorPath), dirname($lockFile->getRealPath())) . basename($conductorPath);
+        return array_map(function ($conductorPath) use ($fileSystem, $lockFile) {
+            return $fileSystem->makePathRelative(dirname($conductorPath), dirname($lockFile->getRealPath())) . basename($conductorPath);
         }, $conductorRealPaths);
     }
 
-    private function fixLockFileRealPathsWithRelativePaths($lockFile, $conductorRealPaths, $relativePaths)
+    private function fixLockFileRealPathsWithRelativePaths(Filesystem $fileSystem, $lockFile, $conductorRealPaths, $relativePaths)
     {
         $initialContent = file_get_contents($lockFile);
         $fixedContent = str_replace($conductorRealPaths, $relativePaths, $initialContent);
@@ -65,7 +68,8 @@ class LockFixerCommand extends BaseCommand
         if ($initialContent === $fixedContent) {
             return false;
         }
+        $fileSystem->dumpFile($lockFile, $fixedContent);
 
-        return file_put_contents($lockFile, $fixedContent);
+        return true;
     }
 }

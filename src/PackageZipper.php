@@ -20,13 +20,13 @@ class PackageZipper
     {
         $json = json_decode(file_get_contents($composerFile), true);
 
-        if (false == isset($json['version'])) {
+        if (false === isset($json['version'])) {
             throw new \RuntimeException('Package "' . $json['name'] . '" has no version defined');
         }
 
         $packageZipPath = $this->getZipPath($json['name'], $json['version']);
 
-        if (false == file_exists($packageZipPath)) {
+        if (false === file_exists($packageZipPath)) {
             $this->createZip($composerFile, $packageZipPath);
         }
 
@@ -61,7 +61,7 @@ class PackageZipper
             Package ' .  $info['name'] . '@' . $info['version'] . '
             is already zipped with the given version but
             the zip composer.json checksum does not match the package/composer.json checksum
-            maybe you forgot to pump the package/composer.json version?');
+            maybe you forgot to increment the package/composer.json version?');
         }
     }
 }
