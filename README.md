@@ -26,6 +26,7 @@ Example Usage
 
 This repository comes with a simple [todo example](examples/todo/), along with an accompanying [article]() which discusses how the tool can be used in its entirety.
 If however, you wish to quickly get up and running, you can add 'conductor' to your root composer.json file and then configure/save the following YAML file to 'conductor.yml'.
+Following this structure it is recommended to only define repository-wide tooling at this level, specifying any application-specific dependences within internal packages.
 
 ``` yaml
 artifacts_repository: ./artifact
