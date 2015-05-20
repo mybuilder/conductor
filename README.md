@@ -65,9 +65,3 @@ Online Material
 
 - [UK Symfony Meetup - Composer in monolithic repositories](http://www.meetup.com/symfony/events/192889222/)
 - [MyBuilder Tech - Using Conductor, by example]()
-
-TODO
-----
-
-- [ ] Create a command similar to 'brew doctor', checking for compatibility and dependency management
-- [ ] Create a command which 'prunes' out out-of-date and unused archived conductors
