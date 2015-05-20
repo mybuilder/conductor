@@ -21,7 +21,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowForInvalidTitle()
     {
-        $task = new Task('', 'Sample Description');
+        new Task('', 'Sample Description');
     }
 
     /**
@@ -30,7 +30,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowForInvalidDescription()
     {
-        $task = new Task('Sample Title', 'Foo');
+        new Task('Sample Title', 'Foo');
     }
 
     /**
