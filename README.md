@@ -1,9 +1,8 @@
 [![Build Status](https://secure.travis-ci.org/mybuilder/conductor.svg?branch=master)](http://travis-ci.org/mybuilder/conductor)
 
-<img src="logo.png" style="max-width:150px;">
+![Conductor](git-header.png)
 
-Conductor
-=========
+---
 
 This tool allows you to manage isolated, internal [Composer](https://getcomposer.org/) packages within a single, monolithic repository.
 Separating units of code based on directory structure, as opposed to at the repository level, maintains a single source of truth whilst providing the benefits of clearly defined component boundaries.
