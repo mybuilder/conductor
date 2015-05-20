@@ -1,18 +1,52 @@
 [![Build Status](https://secure.travis-ci.org/mybuilder/conductor.svg?branch=master)](http://travis-ci.org/mybuilder/conductor)
 
 Conductor
-========
+=========
 
 This tool allows you to manage isolated, internal [Composer](https://getcomposer.org/) packages within a single, monolithic repository.
 Separating units of code based on directory structure, as opposed to at the repository level, maintains a single source of truth whilst providing the benefits of clearly defined component boundaries.
 
-The Problem
------------
+When would you use it?
+----------------------
 
-Years back our code-base was stored in a single SVN repository, requiring much developer discipline to keep clean and decoupled.
-After a large migration we thought it best to break the project into more manageable components, separated into Composer packages in individual Git repositories.
-Unfortunately, it did not turn out like we envisioned, quickly becoming a huge overhead to maintain.
-Now we are back to a single Git repository again, however, this time we have been able to bring back with us the clear separation and boundaries that Composer packages provided us.
+You would use this tool in a project setting where multiple separate applications co-exist (i.e. admin, frontend and mobile-api).
+Within this context each application will share code, such as business logic, to provide the end solution.
+
+An example project repository structure that we use in-kind is shown below:
+
+```bash
+├── app/
+│   ├── admin
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── composer.json
+│   ├── frontend
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── composer.json
+│   └── mobile-api
+│       ├── src/
+│       ├── tests/
+│       └── composer.json
+├── artifact/
+├── bin
+│   └── conductor
+├── package
+│   ├── bar
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── composer.json
+│   └── foo
+│       ├── src/
+│       ├── tests/
+│       └── composer.json
+├── composer.json
+└── conductor.yml
+
+```
+
+As you can see the root-level composer.json file is only used for uniform tooling - so no project specific code should be stored at this level.
+The business logic is contained within each of the isolated packages, with the delivery supplied via the 'app' directory.
 
 Compatibility
 -------------
@@ -21,47 +55,12 @@ Compatibility
 - ✔ Unix-derived systems (CentOS, Debian etc.)
 - ? Windows - Not tested at this time
 
-Example Usage
--------------
+Examples
+--------
 
-This repository comes with a simple [todo example](examples/todo/), along with an accompanying [article]() which discusses how the tool can be used in its entirety.
-If however, you wish to quickly get up and running, you can add 'conductor' to your root composer.json file and then configure/save the following YAML file to 'conductor.yml'.
+At this time the project comes with a simple [todo example](examples/todo/) which illustrates how to use Conductor in it's entirety.
 
-``` yaml
-artifacts_repository: ./artifact
-packages:
-    - package/*
-```
-
-Once this has been completed you can include the following boilerplate (with paths corrected for your setup) to each internal packages composer.json file.
-
-``` json
-{
-    "scripts": {
-        "pre-install-cmd": [
-            "../../bin/conductor update -c ../.."
-        ],
-        "pre-update-cmd": [
-            "../../bin/conductor update -c ../.."
-        ],
-        "pre-autoload-dump": [
-            "../../bin/conductor symlink -c ../.."
-        ],
-        "post-update-cmd": [
-            "../../bin/conductor fix-composer-lock -c ../.."
-        ]
-    },
-    "repositories": [
-        {
-            "type": "artifact",
-            "url": "../../artifact"
-        }
-    ]
-}
-```
-
-Online Material
+Further Reading
 ---------------
 
 - [UK Symfony Meetup - Composer in monolithic repositories](http://www.meetup.com/symfony/events/192889222/)
-- [MyBuilder Tech - Using Conductor, by example]()
