@@ -15,6 +15,9 @@ abstract class BaseCommand extends Command
 
     private $configurationFile;
 
+    /**
+     * @var Conductor
+     */
     protected $conductor;
 
     public function __construct(Conductor $conductor)
@@ -43,11 +46,11 @@ abstract class BaseCommand extends Command
     }
 
     /**
-     * @param string $configuration
+     * @param string $directory
      *
      * @return string
      *
-     * @throws \RuntimeException When configuration is not found
+     * @throws \RuntimeException When conductor.yml is not found
      */
     private function locateConfigurationFile($directory)
     {

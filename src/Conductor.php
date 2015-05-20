@@ -10,11 +10,11 @@ class Conductor
     /**
      * @var Filesystem
      */
-    private $fs;
+    private $fileSystem;
 
-    public function __construct(Filesystem $fs)
+    public function __construct(Filesystem $fileSystem)
     {
-        $this->fs = $fs;
+        $this->fileSystem = $fileSystem;
     }
 
     public function updatePackages($paths, PackageZipper $packageZipper)
@@ -42,10 +42,10 @@ class Conductor
 
     private function symlinkPackageToVendor($packagePath, $vendorPath)
     {
-        $relative = $this->fs->makePathRelative(realpath($packagePath), realpath($vendorPath . '/../'));
+        $relative = $this->fileSystem->makePathRelative(realpath($packagePath), realpath($vendorPath . '/../'));
 
-        $this->fs->rename($vendorPath, $vendorPath . '_linked', true);
-        $this->fs->symlink($relative, $vendorPath);
-        $this->fs->remove($vendorPath . '_linked');
+        $this->fileSystem->rename($vendorPath, $vendorPath . '_linked', true);
+        $this->fileSystem->symlink($relative, $vendorPath);
+        $this->fileSystem->remove($vendorPath . '_linked');
     }
 }

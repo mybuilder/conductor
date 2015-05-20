@@ -6,7 +6,13 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ConductorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Conductor
+     */
     private $conductor;
+    /**
+     * @var Filesystem
+     */
     private $fs;
 
     public function setUp()
@@ -41,7 +47,7 @@ class ConductorTest extends \PHPUnit_Framework_TestCase
     {
         $tempDir = $this->createTempDir();
         $this->fs->mirror(__DIR__ . '/fixtures/symlink', $tempDir);
-        file_put_contents($tempDir . '/package-b/package-a/replace_with_symlink.path', $tempDir . '/package-a/');
+        $this->fs->dumpFile($tempDir . '/package-b/package-a/replace_with_symlink.path', $tempDir . '/package-a/');
 
         $this->conductor->symlinkPackages($tempDir);
 
@@ -61,7 +67,7 @@ class ConductorTest extends \PHPUnit_Framework_TestCase
     private function createTempDir()
     {
         $tempDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
-        mkdir($tempDir, 0777);
+        $this->fs->mkdir($tempDir, 0777);
 
         return $tempDir;
     }
