@@ -64,3 +64,7 @@ Further Reading
 ---------------
 
 - [UK Symfony Meetup - Composer in monolithic repositories](http://www.meetup.com/symfony/events/192889222/)
+
+---
+
+Created by [MyBuilder](http://www.mybuilder.com/) - Check out our [blog](http://tech.mybuilder.com/) for more insight into the open-source projects we release
