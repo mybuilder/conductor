@@ -1,0 +1,53 @@
+#!/usr/bin/env php
+<?php
+
+$distDir = __DIR__ . '/dist';
+$releaseDir = __DIR__ . '/../conductor-release';
+$releaseUrl = 'http://mybuilder.github.io/conductor/release/';
+$releaseBranch = 'gh-pages';
+$repository = 'git@github.com:mybuilder/conductor.git';
+
+// --
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+function execute($cmd)
+{
+    echo "- $cmd\n";
+    system($cmd);
+}
+
+$config = new KevinGH\Box\Configuration('', '');
+$newVersion = $config->getGitVersion();
+$newRelease = "conductor-$newVersion.phar";
+
+echo "Have you made a new tag release for this version? ";
+if ('y' !== strtolower(trim(fgets(STDIN)))) {
+    exit;
+}
+
+echo "Build\n";
+execute(__DIR__ . '/bin/box build');
+echo "\n";
+
+echo "Clone\n";
+execute("rm -rf $releaseDir");
+execute("git clone -b $releaseBranch --single-branch $repository $releaseDir");
+$releaseDir = realpath($releaseDir);
+echo "\n";
+
+echo "Copy\n";
+execute("cp $distDir/$newRelease $releaseDir/release/$newRelease");
+
+echo "Manifest\n";
+$manifests = is_file("$releaseDir/manifest.json")
+    ? json_decode(file_get_contents("$releaseDir/manifest.json"), true)
+    : array();
+$manifests[] = array(
+    'name' => $newRelease,
+    'sha1' => sha1_file("$distDir/$newRelease"),
+    'url' => "$releaseUrl/$newRelease",
+    'version' => $newVersion
+);
+file_put_contents("$releaseDir/manifest.json", json_encode($manifests, JSON_PRETTY_PRINT));
+echo "Writing... $releaseDir/manifest.json\n";

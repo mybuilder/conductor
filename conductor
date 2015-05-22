@@ -14,8 +14,9 @@ use MyBuilder\Conductor\Conductor;
 
 $conductor = new Conductor(new Filesystem());
 
-$app = new Application();
+$app = new Application('Conductor', '@package_version@');
 $app->add(new Commands\UpdateCommand($conductor));
 $app->add(new Commands\SymlinkCommand($conductor));
 $app->add(new Commands\LockFixerCommand($conductor));
+$app->add(new Commands\SelfUpdateCommand);
 $app->run();

@@ -1,0 +1,24 @@
+{
+    "chmod": "0755",
+    "directories": [ "src" ],
+    "files": [ "vendor/herrera-io/phar-update/res/schema.json" ],
+    "finder": [
+        {
+            "name": "*.php",
+            "exclude": [
+              "Tests",
+              "tests",
+              "phpunit",
+              "sebastian",
+              "phpspec",
+              "doctrine",
+              "phpdocumentor"
+            ],
+            "in": "vendor"
+        }
+    ],
+    "git-version": "package_version",
+    "main": "./conductor",
+    "output": "./dist/conductor-@git-version@.phar",
+    "stub": true
+}
