@@ -10,5 +10,11 @@
         "sha1": "a38327c738ea5cc9d1343282a48964579a3dbabd",
         "url": "http:\/\/mybuilder.github.io\/conductor\/release\/\/conductor-1.0.0.phar",
         "version": "1.0.0"
+    },
+    {
+        "name": "conductor-1.0.1.phar",
+        "sha1": "7c370c4676eb341d38b411c1b3de3d2aaac496e5",
+        "url": "http:\/\/mybuilder.github.io\/conductor\/release\/\/conductor-1.0.1.phar",
+        "version": "1.0.1"
     }
 ]
