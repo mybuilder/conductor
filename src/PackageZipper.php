@@ -21,7 +21,7 @@ class PackageZipper
         $json = json_decode(file_get_contents($composerFile), true);
 
         if (false === isset($json['version'])) {
-            throw new \RuntimeException('Package "' . $json['name'] . '" has no version defined');
+            throw new \RuntimeException('Package "' . $json['name'] . '" has no version defined in file: ' . $composerFile->getPathname() . '.');
         }
 
         $packageZipPath = $this->getZipPath($json['name'], $json['version']);
