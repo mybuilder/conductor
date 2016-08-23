@@ -2,6 +2,9 @@
 
 ![Conductor](conductor-logo.png)
 
+
+**We no longer use Conductor at MyBuilder and instead now use the [Composer path](https://getcomposer.org/doc/05-repositories.md#path) but if you want to take over development of Conductor let us know.**
+
 ---
 
 This tool allows you to manage isolated, internal [Composer](https://getcomposer.org/) packages within a single, monolithic repository.
